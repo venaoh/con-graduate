@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ProtectedRoute from "./components/protected-route";
 import Layout from "./components/layout";
 import LoadingScreen from "./components/loading-screen";
 import Home from "./routes/home";
@@ -13,7 +14,11 @@ import { auth } from "./firebase";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <ProtectedRoute>
+        <Layout />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: "",
