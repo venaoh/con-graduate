@@ -11,6 +11,8 @@ import { useEffect, useState } from "react";
 import { auth } from "./firebase";
 import { theme } from "./shared/theme";
 import { GlobalStyles } from "./shared/global";
+import Gallery from "./routes/gallery";
+import Mailbox from "./routes/mailbox";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,14 @@ const router = createBrowserRouter([
         path: "profile",
         element: <Prifile />,
       },
+      {
+        path: "gallery",
+        element: <Gallery />,
+      },
+      {
+        path: "mailbox",
+        element: <Mailbox />,
+      },
     ],
   },
   {
@@ -42,6 +52,7 @@ const router = createBrowserRouter([
 ]);
 
 const Wrapper = styled.div`
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;

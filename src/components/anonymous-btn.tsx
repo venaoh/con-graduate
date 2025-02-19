@@ -1,28 +1,8 @@
 import { getAuth, signInAnonymously } from "firebase/auth";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { Button, Logo } from "./auth-components";
 
-const Button = styled.span`
-  background-color: white;
-  width: 100%;
-  padding: 8px 20px;
-  border-radius: 10px;
-  border: 2px solid ${({ theme }) => theme.colors.pkblue};
-  font-size: ${({ theme }) => theme.fontSize.l};
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  &:hover,
-  &:focus {
-    background-color: ${({ theme }) => theme.colors.pklightsky};
-  }
-`;
-
-const Logo = styled.img`
-  height: 30px;
-`;
 export default function AnonymousButton() {
   const navigate = useNavigate();
   const onClick = async () => {

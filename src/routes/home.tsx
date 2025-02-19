@@ -1,39 +1,30 @@
 import {
   Box,
-  BoxName,
+  UserName,
   Text,
   Title,
   Wrapper,
   Profile,
-  BoxContent,
+  Contents,
 } from "../components/page-components";
+import PostForm from "../components/post-form";
+import Timeline from "../components/timeline";
 
 export default function Home() {
   return (
     <Wrapper>
-      <Title>Home</Title>
+      <Title>방명록</Title>
       <Text>▷ 졸업 축하 메시지를 남겨주세요!</Text>
-      <Box>
-        <BoxName>
-          <Profile src="/icon-heart.png" />
-          NAME
-        </BoxName>
-        <BoxContent>예시 내용입니다.</BoxContent>
-      </Box>
-      <Box>
-        <BoxName>
-          <Profile src="/icon-heart.png" />
-          NAME
-        </BoxName>
-        <BoxContent>예시 내용입니다.</BoxContent>
-      </Box>
-      <Box>
-        <BoxName>
-          <Profile src="/icon-heart.png" />
-          NAME
-        </BoxName>
-        <BoxContent>예시 내용입니다.</BoxContent>
-      </Box>
+      <Contents>
+        <Box>
+          <UserName>
+            <Profile src="/icon-heart.png" />
+            NAME
+          </UserName>
+          <PostForm />
+        </Box>
+        <Timeline />
+      </Contents>
     </Wrapper>
   );
 }

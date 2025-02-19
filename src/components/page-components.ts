@@ -7,6 +7,7 @@ export const Wrapper = styled.div`
   padding: 12px 30px;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
 `;
 
 export const Title = styled.h1`
@@ -26,6 +27,12 @@ export const Text = styled.span`
   margin-bottom: 24px;
 `;
 
+export const Contents = styled.div`
+  display: grid;
+  gap: 50px;
+  grid-template-rows: 1fr 5fr;
+`;
+
 export const Box = styled.div`
   width: 100%;
   display: flex;
@@ -37,7 +44,7 @@ export const Box = styled.div`
   background-color: ${({ theme }) => theme.colors.pkbeige};
 `;
 
-export const BoxName = styled.div`
+export const UserName = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -49,10 +56,4 @@ export const Profile = styled.img`
   height: 30px;
   background-color: white;
   margin-right: 12px;
-`;
-
-export const BoxContent = styled.div`
-  display: flex;
-  background-color: ${({ theme }) => theme.colors.pkivory};
-  padding: 12px;
 `;

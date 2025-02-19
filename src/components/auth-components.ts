@@ -3,11 +3,12 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.pkivory};
   width: ${({ theme }) => theme.width.m};
-  height: 540px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   padding: 48px 36px;
+  margin: 60px;
 `;
 
 export const Title = styled.h1`
@@ -17,7 +18,7 @@ export const Title = styled.h1`
 `;
 
 export const Form = styled.form`
-  margin-bottom: 12px;
+  margin: 8px 0;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -27,7 +28,7 @@ export const Form = styled.form`
 export const Line = styled.div`
   width: 100%;
   height: 2px;
-  margin: 16px 0;
+  margin: 20px 0;
   background-color: ${({ theme }) => theme.colors.pkblue};
 `;
 
@@ -41,12 +42,21 @@ export const Input = styled.input`
     cursor: pointer;
     background-color: ${({ theme }) => theme.colors.pkblue};
     color: white;
-    &:hover {
+    &:hover,
+    &:focus {
       opacity: 0.8;
+    }
+    &:active {
+      border-color: ${({ theme }) => theme.colors.pkblue};
+      background-color: ${({ theme }) => theme.colors.pkpoint};
     }
   }
   &::placeholder {
     color: #aaaaaa;
+  }
+  &:focus {
+    outline: none;
+    border-color: ${({ theme }) => theme.colors.pkpoint};
   }
 `;
 

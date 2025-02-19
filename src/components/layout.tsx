@@ -1,26 +1,37 @@
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { auth } from "../firebase";
 
 const Wrapper = styled.div`
-  margin: 100px;
+  margin: 60px;
   width: ${({ theme }) => theme.width.m};
   background-color: ${({ theme }) => theme.colors.pkivory};
   display: flex;
   flex-direction: column;
 `;
 
-const Tab = styled.div`
+const StyledLink = styled(Link)`
+  color: inherit;
+  text-decoration: none;
+  &:hover {
+    color: ${({ theme }) => theme.colors.pkpoint};
+  }
+`;
+
+const Menu = styled.div`
   width: 100%;
   background-color: ${({ theme }) => theme.colors.pkivory};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  text-decoration: none;
 `;
 
-const TabItem = styled.div`
-  width: ${({ theme }) => theme.width.m3};
+const MenuItem = styled.div`
+  width: 100%;
   padding: 8px 4px;
   border: 2px solid ${({ theme }) => theme.colors.pkbeige};
   display: flex;
@@ -58,43 +69,63 @@ const Footer = styled.footer`
 `;
 
 export default function layout() {
-  const [activate, setActivate] = useState("방명록");
-  const logOut = () => {
-    auth.signOut();
+  const navigate = useNavigate();
+  const [activate, setActivate] = useState("home");
+  const logOut = async () => {
+    const ok = confirm("로그아웃 하시겠습니까?");
+    if (ok) {
+      auth.signOut();
+      navigate("/login");
+    }
+  };
+  const onHome = async () => {
+    setActivate("home");
+  };
+  const onGallery = async () => {
+    setActivate("gallery");
+  };
+  const onMailbox = async () => {
+    setActivate("mailbox");
   };
   return (
     <Wrapper>
-      <Tab>
-        <TabItem>
-          {activate === "방명록" ? (
-            <Logo src="/icon-fill-heart.png" />
-          ) : (
-            <Logo src="/icon-heart.png" />
-          )}
-          방명록
-        </TabItem>
-        <TabItem>
-          {activate === "갤러리" ? (
-            <Logo src="/icon-fill-heart.png" />
-          ) : (
-            <Logo src="/icon-heart.png" />
-          )}
-          갤러리
-        </TabItem>
-        <TabItem>
-          {activate === "편지함" ? (
-            <Logo src="/icon-fill-heart.png" />
-          ) : (
-            <Logo src="/icon-heart.png" />
-          )}
-          편지함
-        </TabItem>
-      </Tab>
+      <Menu>
+        <StyledLink to="/" onClick={onHome}>
+          <MenuItem>
+            {activate === "home" ? (
+              <Logo src="/icon-fill-heart.png" />
+            ) : (
+              <Logo src="/icon-heart.png" />
+            )}
+            방명록
+          </MenuItem>
+        </StyledLink>
+        <StyledLink to="/gallery" onClick={onGallery}>
+          <MenuItem>
+            {activate === "gallery" ? (
+              <Logo src="/icon-fill-heart.png" />
+            ) : (
+              <Logo src="/icon-heart.png" />
+            )}
+            갤러리
+          </MenuItem>
+        </StyledLink>
+        <StyledLink to="/mailbox" onClick={onMailbox}>
+          <MenuItem>
+            {activate === "mailbox" ? (
+              <Logo src="/icon-fill-heart.png" />
+            ) : (
+              <Logo src="/icon-heart.png" />
+            )}
+            편지함
+          </MenuItem>
+        </StyledLink>
+      </Menu>
       <InfoBar>
         <Button onClick={logOut}>로그아웃</Button>
       </InfoBar>
       <Outlet />
-      <Footer>Made by Oh, Seojin {"(@Venaoh)"}</Footer>
+      <Footer>- Made by Oh, Seojin {"(@Venaoh)"} -</Footer>
     </Wrapper>
   );
 }

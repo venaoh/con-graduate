@@ -16,7 +16,7 @@ export const theme = {
     m: "16px",
     l: "18px",
     xl: "24px",
-    xxl: "48px",
+    xxl: "36px",
   },
   mediaSize: {
     xs: "screen and (max-width: '400px')",
@@ -27,7 +27,6 @@ export const theme = {
     "2xl": "screen and (max-width: '1536px')",
   },
   width: {
-    m3: "160px",
     s: "320px",
     m: "480px",
     l: "540px",
