@@ -1,7 +1,4 @@
-import {
-  sendPasswordResetEmail,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { auth } from "../firebase";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,12 +7,13 @@ import {
   Error,
   Form,
   Input,
-  SendLink,
+  Line,
   Switcher,
   Title,
   Wrapper,
 } from "../components/auth-components";
 import GoogleButton from "../components/google-btn";
+import AnonymousButton from "../components/anonymous-btn";
 
 export default function CreateAccount() {
   const navigate = useNavigate();
@@ -56,12 +54,11 @@ export default function CreateAccount() {
 
     console.log(name, email, password);
   };
-  const onClick = async () => {
-    await sendPasswordResetEmail(auth, email);
-  };
   return (
     <Wrapper>
-      <Title>Log into X</Title>
+      <Title>LOGIN</Title>
+      <AnonymousButton />
+      <Line />
       <Form onSubmit={onSubmit}>
         <Input
           onChange={onChange}
@@ -75,16 +72,15 @@ export default function CreateAccount() {
           onChange={onChange}
           name="password"
           value={password}
-          placeholder="Passeord"
+          placeholder="Password"
           type="password"
           required
         />
-        <Input type="submit" value={isLoading ? "Loading..." : "Login"} />
+        <Input type="submit" value={isLoading ? "Loading..." : "로그인"} />
       </Form>
       {error !== "" ? <Error>{error}</Error> : null}
       <Switcher>
-        Don't have an account?{" "}
-        <Link to="/create-account">Create one &rarr;</Link>
+        계정이 없으신가요? <Link to="/create-account">가입하기 &rarr;</Link>
       </Switcher>
       <GoogleButton />
     </Wrapper>

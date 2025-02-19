@@ -6,10 +6,11 @@ import Home from "./routes/home";
 import Prifile from "./routes/profile";
 import Login from "./routes/login";
 import CreateAccount from "./routes/create-account";
-import styled, { createGlobalStyle } from "styled-components";
-import reset from "styled-reset";
+import styled, { ThemeProvider } from "styled-components";
 import { useEffect, useState } from "react";
 import { auth } from "./firebase";
+import { theme } from "./shared/theme";
+import { GlobalStyles } from "./shared/global";
 
 const router = createBrowserRouter([
   {
@@ -40,22 +41,10 @@ const router = createBrowserRouter([
   },
 ]);
 
-const GlobalStyles = createGlobalStyle`
-  ${reset};
-  * {
-    box-sizing: border-box;
-  }
-  body {
-    background-color: black;
-    color: white;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  }
-`;
-
 const Wrapper = styled.div`
-  height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
 
 function App() {
@@ -73,10 +62,12 @@ function App() {
   }, []);
 
   return (
-    <Wrapper>
-      <GlobalStyles />
-      {isLoading ? <LoadingScreen /> : <RouterProvider router={router} />}
-    </Wrapper>
+    <ThemeProvider theme={theme}>
+      <Wrapper>
+        <GlobalStyles />
+        {isLoading ? <LoadingScreen /> : <RouterProvider router={router} />}
+      </Wrapper>
+    </ThemeProvider>
   );
 }
 

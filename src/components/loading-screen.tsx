@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 const Wrapper = styled.div`
   height: 100vh;
   display: flex;
@@ -7,7 +6,8 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 const Text = styled.span`
-  font-size: 24px;
+  color: white;
+  font-size: ${({ theme }) => theme.fontSize.xl};
 `;
 
 export default function LoadingScreen() {

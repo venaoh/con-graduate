@@ -1,6 +1,7 @@
 import {
+  getAuth,
+  signInAnonymously,
   createUserWithEmailAndPassword,
-  sendPasswordResetEmail,
   updateProfile,
 } from "firebase/auth";
 import { useState } from "react";
@@ -16,6 +17,7 @@ import {
   Wrapper,
 } from "../components/auth-components";
 import GoogleButton from "../components/google-btn";
+import AnonymousButton from "../components/anonymous-btn";
 
 export default function CreateAccount() {
   const navigate = useNavigate();
@@ -73,7 +75,7 @@ export default function CreateAccount() {
 
   return (
     <Wrapper>
-      <Title>Join X</Title>
+      <Title>Join</Title>
       <Form onSubmit={onSubmit}>
         <Input
           onChange={onChange}
@@ -99,16 +101,14 @@ export default function CreateAccount() {
           type="password"
           required
         />
-        <Input
-          type="submit"
-          value={isLoading ? "Loading..." : "Create Account"}
-        />
+        <Input type="submit" value={isLoading ? "Loading..." : "가입하기"} />
       </Form>
       {error !== "" ? <Error>{error}</Error> : null}
       <Switcher>
-        Already have an account? <Link to="/login">Log in &rarr;</Link>
+        이미 계정이 있으신가요? <Link to="/login">로그인 &rarr;</Link>
       </Switcher>
       <GoogleButton />
+      <AnonymousButton />
     </Wrapper>
   );
 }
