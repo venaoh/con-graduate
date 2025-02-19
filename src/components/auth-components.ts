@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
 
   @media (${({ theme }) => theme.mediaSize.xs}) {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     margin: 0;
   }
 `;

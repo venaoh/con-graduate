@@ -14,6 +14,7 @@ const Wrapper = styled.div`
   @media (${({ theme }) => theme.mediaSize.xs}) {
     width: 100%;
     margin: 0;
+    height: 100vh;
   }
 `;
 
@@ -89,7 +90,7 @@ export default function layout() {
     setActivate("방명록");
   };
   const onGallery = async () => {
-    setActivate("갤러리");
+    setActivate("공사중");
   };
   const onMailbox = async () => {
     setActivate("편지함");
@@ -109,12 +110,12 @@ export default function layout() {
         </StyledLink>
         <StyledLink to="/gallery" onClick={onGallery}>
           <MenuItem>
-            {activate === "갤러리" ? (
+            {activate === "공사중" ? (
               <Logo src="/icon-fill-heart.png" />
             ) : (
               <Logo src="/icon-heart.png" />
             )}
-            갤러리
+            🚧공사중
           </MenuItem>
         </StyledLink>
         <StyledLink to="/mailbox" onClick={onMailbox}>
