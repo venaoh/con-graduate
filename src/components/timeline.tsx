@@ -1,7 +1,14 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { db } from "../firebase";
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import {
+  collection,
+  limit,
+  onSnapshot,
+  orderBy,
+  query,
+  Unsubscribe,
+} from "firebase/firestore";
 import Post from "./post";
 
 export interface IPost {
@@ -10,7 +17,7 @@ export interface IPost {
   post: string;
   userId: string;
   username: string;
-  createAt: number;
+  createdAt: number;
 }
 
 const Wrapper = styled.div`
@@ -19,17 +26,27 @@ const Wrapper = styled.div`
 
 export default function Timeline() {
   const [posts, setPosts] = useState<IPost[]>([]);
-  const fetchPosts = async () => {
-    const postsQuery = query(collection(db, "posts"), orderBy("createdAt"));
-    const snapshot = await getDocs(postsQuery);
-    const postlist = snapshot.docs.map((doc) => {
-      const { post, createdAt, userId, username, fileData } = doc.data();
-      return { post, createdAt, userId, username, fileData, id: doc.id };
-    });
-    setPosts(postlist);
-  };
+
   useEffect(() => {
+    let unsubscribe: Unsubscribe | null = null;
+    const fetchPosts = async () => {
+      const postsQuery = query(
+        collection(db, "posts"),
+        orderBy("createdAt", "desc"),
+        limit(30)
+      );
+      unsubscribe = await onSnapshot(postsQuery, (snapshot) => {
+        const posts = snapshot.docs.map((doc) => {
+          const { post, createdAt, userId, username, fileData } = doc.data();
+          return { post, createdAt, userId, username, fileData, id: doc.id };
+        });
+        setPosts(posts);
+      });
+    };
     fetchPosts();
+    return () => {
+      unsubscribe && unsubscribe();
+    };
   }, []);
   return (
     <Wrapper>

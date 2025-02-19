@@ -9,6 +9,12 @@ export const Wrapper = styled.div`
   align-items: center;
   padding: 48px 36px;
   margin: 60px;
+
+  @media (${({ theme }) => theme.mediaSize.xs}) {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
 `;
 
 export const Title = styled.h1`

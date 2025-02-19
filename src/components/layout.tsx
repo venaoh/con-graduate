@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { auth } from "../firebase";
+import { Title } from "./page-components";
 
 const Wrapper = styled.div`
   margin: 60px;
@@ -9,6 +10,11 @@ const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.pkivory};
   display: flex;
   flex-direction: column;
+
+  @media (${({ theme }) => theme.mediaSize.xs}) {
+    width: 100%;
+    margin: 0;
+  }
 `;
 
 const StyledLink = styled(Link)`
@@ -46,9 +52,9 @@ const Logo = styled.img`
 
 const InfoBar = styled.div`
   width: 100%;
-  display: flex;
-  padding: 12px;
-  justify-content: end;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  padding: 12px 30px;
 `;
 
 const Button = styled.button`
@@ -57,6 +63,7 @@ const Button = styled.button`
   align-items: center;
   padding: 4px 8px;
   border-radius: 5px;
+  align-self: center;
   color: ${({ theme }) => theme.colors.pkblue};
   border: 2px solid ${({ theme }) => theme.colors.pkblue};
   background-color: ${({ theme }) => theme.colors.pkbeige};
@@ -70,7 +77,7 @@ const Footer = styled.footer`
 
 export default function layout() {
   const navigate = useNavigate();
-  const [activate, setActivate] = useState("home");
+  const [activate, setActivate] = useState("방명록");
   const logOut = async () => {
     const ok = confirm("로그아웃 하시겠습니까?");
     if (ok) {
@@ -79,20 +86,20 @@ export default function layout() {
     }
   };
   const onHome = async () => {
-    setActivate("home");
+    setActivate("방명록");
   };
   const onGallery = async () => {
-    setActivate("gallery");
+    setActivate("갤러리");
   };
   const onMailbox = async () => {
-    setActivate("mailbox");
+    setActivate("편지함");
   };
   return (
     <Wrapper>
       <Menu>
         <StyledLink to="/" onClick={onHome}>
           <MenuItem>
-            {activate === "home" ? (
+            {activate === "방명록" ? (
               <Logo src="/icon-fill-heart.png" />
             ) : (
               <Logo src="/icon-heart.png" />
@@ -102,7 +109,7 @@ export default function layout() {
         </StyledLink>
         <StyledLink to="/gallery" onClick={onGallery}>
           <MenuItem>
-            {activate === "gallery" ? (
+            {activate === "갤러리" ? (
               <Logo src="/icon-fill-heart.png" />
             ) : (
               <Logo src="/icon-heart.png" />
@@ -112,7 +119,7 @@ export default function layout() {
         </StyledLink>
         <StyledLink to="/mailbox" onClick={onMailbox}>
           <MenuItem>
-            {activate === "mailbox" ? (
+            {activate === "편지함" ? (
               <Logo src="/icon-fill-heart.png" />
             ) : (
               <Logo src="/icon-heart.png" />
@@ -122,6 +129,7 @@ export default function layout() {
         </StyledLink>
       </Menu>
       <InfoBar>
+        <Title>{activate}</Title>
         <Button onClick={logOut}>로그아웃</Button>
       </InfoBar>
       <Outlet />

@@ -52,7 +52,7 @@ export default function CreateAccount() {
       setIsLoading(false);
     }
 
-    console.log(name, email, password);
+    console.log(email, password);
   };
   return (
     <Wrapper>

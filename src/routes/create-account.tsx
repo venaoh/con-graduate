@@ -1,9 +1,4 @@
-import {
-  getAuth,
-  signInAnonymously,
-  createUserWithEmailAndPassword,
-  updateProfile,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useState } from "react";
 import { auth } from "../firebase";
 import { useNavigate, Link } from "react-router-dom";
@@ -12,6 +7,7 @@ import {
   Error,
   Form,
   Input,
+  Line,
   Switcher,
   Title,
   Wrapper,
@@ -76,6 +72,9 @@ export default function CreateAccount() {
   return (
     <Wrapper>
       <Title>Join</Title>
+      <AnonymousButton />
+      <Line />
+
       <Form onSubmit={onSubmit}>
         <Input
           onChange={onChange}
@@ -108,7 +107,6 @@ export default function CreateAccount() {
         이미 계정이 있으신가요? <Link to="/login">로그인 &rarr;</Link>
       </Switcher>
       <GoogleButton />
-      <AnonymousButton />
     </Wrapper>
   );
 }

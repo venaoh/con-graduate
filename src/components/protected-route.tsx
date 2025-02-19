@@ -1,4 +1,4 @@
-import { createRoutesFromChildren, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { auth } from "../firebase";
 
 export default function ProtectedRoute({

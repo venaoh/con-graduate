@@ -3,11 +3,20 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.pkivory};
   width: ${({ theme }) => theme.width.m};
-  height: 600px;
-  padding: 12px 30px;
+  padding: 0 30px;
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
+
+  @media (${({ theme }) => theme.mediaSize.xs}) {
+    width: 100%;
+    margin: 0;
+  }
+
+  @media (${({ theme }) => theme.mediaSize.lg}) {
+    height: 540px;
+    background-color: violet;
+    overflow-y: scroll;
+  }
 `;
 
 export const Title = styled.h1`
@@ -28,9 +37,8 @@ export const Text = styled.span`
 `;
 
 export const Contents = styled.div`
-  display: grid;
-  gap: 50px;
-  grid-template-rows: 1fr 5fr;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const Box = styled.div`
@@ -56,4 +64,5 @@ export const Profile = styled.img`
   height: 30px;
   background-color: white;
   margin-right: 12px;
+  border: 2px solid ${({ theme }) => theme.colors.pkblue};
 `;

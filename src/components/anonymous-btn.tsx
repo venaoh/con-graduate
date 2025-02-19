@@ -1,5 +1,4 @@
 import { getAuth, signInAnonymously } from "firebase/auth";
-import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { Button, Logo } from "./auth-components";
 
