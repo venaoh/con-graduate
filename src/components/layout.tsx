@@ -93,7 +93,7 @@ export default function layout() {
     setActivate("공사중");
   };
   const onMailbox = async () => {
-    setActivate("편지함");
+    setActivate("인사말");
   };
   return (
     <Wrapper>
@@ -120,12 +120,12 @@ export default function layout() {
         </StyledLink>
         <StyledLink to="/mailbox" onClick={onMailbox}>
           <MenuItem>
-            {activate === "편지함" ? (
+            {activate === "인사말" ? (
               <Logo src="/icon-fill-heart.png" />
             ) : (
               <Logo src="/icon-heart.png" />
             )}
-            편지함
+            인사말
           </MenuItem>
         </StyledLink>
       </Menu>
